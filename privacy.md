@@ -146,7 +146,7 @@ Cartly is rated **4+** on the App Store because it contains no objectionable con
 
 If you sign in with Apple and choose **Hide My Email**, Apple gives us an anonymized relay email address (ending in `@privaterelay.appleid.com`) instead of your real email. Messages we send to that address are forwarded by Apple to your real inbox. We cannot see your real email address and cannot unmask it. Deleting your Cartly account works the same way whether you use a real or relay email.
 
-If you later revoke Cartly's access to Sign in with Apple (iOS **Settings → Apple ID → Password & Security → Apps Using Apple ID → Cartly → Stop Using Apple ID**), we will delete your Cartly account on receipt of Apple's revocation notification.
+If you revoke Cartly's access to Sign in with Apple (iOS **Settings → Apple ID → Password & Security → Apps Using Apple ID → Cartly → Stop Using Apple ID**), you will be signed out of Cartly and unable to sign back in with that Apple ID. To also delete your stored data, use **Settings → Delete Account** in the app before revoking.
 
 ## 12. Security
 
