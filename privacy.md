@@ -6,14 +6,16 @@ permalink: /privacy/
 
 # Privacy Policy
 
-**Effective date:** April 17, 2026
-**Last updated:** April 17, 2026
+**Effective date:** April 18, 2026
+**Last updated:** April 18, 2026
 
 This Privacy Policy explains how Cartly ("**Cartly**," "**we**," "**us**," or "**our**") collects, uses, shares, and protects information when you use the Cartly mobile app (the "**Service**"). By using Cartly, you agree to this Policy.
 
 ## 1. Who we are
 
 Cartly is operated by **Tyler Piwowarski**, an individual sole proprietor based in California, United States. In this Policy, "we" refers to this operator acting under the Cartly brand. If you have any questions, you can reach us at **privacy@usecartly.com**.
+
+**Business succession.** In the event Cartly is sold, transferred, merged, or discontinued, user data may be transferred to a successor entity. We will provide reasonable advance notice to users by email, and any successor will be required to honor this Privacy Policy or obtain fresh consent before making material changes to how your data is handled.
 
 ## 2. Information we collect
 
@@ -73,7 +75,7 @@ Google Gemini's retention and use of the image is governed by Google's terms —
 
 ## 5. Third-party services we use
 
-The Service relies on a small number of third parties. Each handles the data described below under its own privacy terms.
+The Service relies on a small number of third parties. Each handles the data described below under its own privacy terms. We rely on our providers' standard Data Processing Agreements (DPAs), as required under GDPR Article 28, to govern their processing of personal data on our behalf.
 
 **Supabase** (database, authentication, and server-side functions; hosted on AWS)
 Supabase stores your account, dietary preferences, scan history, cart, and subscription status. Data is encrypted at rest and in transit. See the [Supabase Privacy Policy](https://supabase.com/privacy).
@@ -102,6 +104,8 @@ You can:
 - **Request a copy of your data** ("data portability") by emailing privacy@usecartly.com. We will send you your account, dietary preferences, scan history, cart, and subscription-status row in a machine-readable format within 30 days.
 - **Correct inaccurate data** by emailing privacy@usecartly.com or editing in the app where applicable.
 - **Object to or restrict processing** of your data in certain circumstances — email us at privacy@usecartly.com and we will respond.
+
+**Appeals.** If we decline to take action on a data request described above, you may appeal by emailing **privacy@usecartly.com** with the subject line "Privacy Request Appeal" and a brief description of the original request and why you believe the denial was incorrect. We will respond in writing with an explanation of our decision within 45 days. If your appeal is denied, you may submit a complaint to your applicable state attorney general or data protection authority.
 
 ## 8. European Economic Area, United Kingdom, and Switzerland (GDPR / UK GDPR)
 
@@ -136,19 +140,27 @@ If you are a California resident, the California Consumer Privacy Act, as amende
 
 **How to exercise your rights.** Email privacy@usecartly.com, or use **Settings → Delete Account** in the app. We will respond within 45 days. We verify requests by matching the email address on your account.
 
-## 10. Children's privacy
+## 10. Additional U.S. state privacy rights
+
+Residents of **Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah,** and **Virginia** may have additional rights under their applicable state privacy laws, including the right to access, correct, delete, and obtain a portable copy of their personal information, and to opt out of targeted advertising, the sale of personal information, or profiling that produces legal or similarly significant effects. We do not engage in targeted advertising, the sale of personal information, or such profiling, so the opt-out rights do not currently apply to any processing Cartly performs — but the access, correction, deletion, and portability rights are fully available to you.
+
+To exercise these rights, email **privacy@usecartly.com**. We will respond within 45 days. We verify requests by matching the email address on your account. If we decline your request, you may appeal as described in Section 7.
+
+## 11. Children's privacy
 
 Cartly is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has created an account, email privacy@usecartly.com and we will delete the account and any associated data.
 
 Cartly is rated **4+** on the App Store because it contains no objectionable content, but the service itself is intended for general audiences 13 and older.
 
-## 11. Apple Sign In and "Hide My Email"
+**Teen users (13–17).** Users between the ages of 13 and 17 may use Cartly only with the consent of a parent or legal guardian. By using the Service, users under 18 represent that they have obtained such consent. In jurisdictions that require parental consent for users under 16 (such as certain EEA member states under GDPR Article 8), that higher age threshold applies instead. Parents or guardians may request deletion of a minor's account by emailing privacy@usecartly.com.
+
+## 12. Apple Sign In and "Hide My Email"
 
 If you sign in with Apple and choose **Hide My Email**, Apple gives us an anonymized relay email address (ending in `@privaterelay.appleid.com`) instead of your real email. Messages we send to that address are forwarded by Apple to your real inbox. We cannot see your real email address and cannot unmask it. Deleting your Cartly account works the same way whether you use a real or relay email.
 
 If you revoke Cartly's access to Sign in with Apple (iOS **Settings → Apple ID → Password & Security → Apps Using Apple ID → Cartly → Stop Using Apple ID**), you will be signed out of Cartly and unable to sign back in with that Apple ID. To also delete your stored data, use **Settings → Delete Account** in the app before revoking.
 
-## 12. Security
+## 13. Security
 
 We protect your data with industry-standard measures:
 - TLS 1.2+ for all network traffic between your device, our Edge Functions, and third-party APIs.
@@ -159,13 +171,13 @@ We protect your data with industry-standard measures:
 
 No system is perfectly secure. If we discover a breach affecting your personal information, we will notify you as required by applicable law.
 
-## 13. Changes to this Policy
+## 14. Changes to this Policy
 
 We may update this Policy from time to time. If we make a material change, we will update the Effective Date at the top and notify you in the app or by email. Your continued use of the Service after an update constitutes acceptance of the updated Policy.
 
 A diff history of every change is publicly visible in the Git history of the repository that hosts this page.
 
-## 14. Contact
+## 15. Contact
 
 For questions or requests about this Policy or your data, email:
 
