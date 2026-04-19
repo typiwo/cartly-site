@@ -13,7 +13,7 @@ This Privacy Policy explains how Cartly ("**Cartly**," "**we**," "**us**," or "*
 
 ## 1. Who we are
 
-Cartly is operated by **Tyler Piwowarski**, an individual sole proprietor based in California, United States. In this Policy, "we" refers to this operator acting under the Cartly brand. If you have any questions, you can reach us at **privacy@cartly.app**.
+Cartly is operated by **Tyler Piwowarski**, an individual sole proprietor based in California, United States. In this Policy, "we" refers to this operator acting under the Cartly brand. If you have any questions, you can reach us at **privacy@usecartly.com**.
 
 ## 2. Information we collect
 
@@ -54,7 +54,7 @@ We use your information solely to:
 - Provide the scanning, scoring, search, and cart features.
 - Personalize your dietary alerts based on the preferences you set.
 - Validate your Cartly Pro subscription.
-- Respond to support requests sent to privacy@cartly.app.
+- Respond to support requests sent to privacy@usecartly.com.
 - Comply with legal obligations.
 
 We do not sell your personal information. We do not use your personal information for advertising or for profiling outside the scope of the Service.
@@ -99,22 +99,22 @@ You can:
 - **Delete your account** at any time from inside the app: **Settings → Delete Account**. This permanently removes your scan history, cart, dietary preferences, and account record.
 - **Revoke camera or photo-library access** at any time in iOS **Settings → Privacy → Camera / Photos → Cartly**.
 - **Cancel your Cartly Pro subscription** at any time in your iOS **Apple ID Account Settings → Subscriptions**.
-- **Request a copy of your data** ("data portability") by emailing privacy@cartly.app. We will send you your account, dietary preferences, scan history, cart, and subscription-status row in a machine-readable format within 30 days.
-- **Correct inaccurate data** by emailing privacy@cartly.app or editing in the app where applicable.
-- **Object to or restrict processing** of your data in certain circumstances — email us at privacy@cartly.app and we will respond.
+- **Request a copy of your data** ("data portability") by emailing privacy@usecartly.com. We will send you your account, dietary preferences, scan history, cart, and subscription-status row in a machine-readable format within 30 days.
+- **Correct inaccurate data** by emailing privacy@usecartly.com or editing in the app where applicable.
+- **Object to or restrict processing** of your data in certain circumstances — email us at privacy@usecartly.com and we will respond.
 
 ## 8. European Economic Area, United Kingdom, and Switzerland (GDPR / UK GDPR)
 
 If you are in the EEA, the United Kingdom, or Switzerland, the General Data Protection Regulation (or the UK GDPR) gives you specific rights.
 
-**Data controller.** Tyler Piwowarski, operating Cartly, is the data controller for the personal data described in this Policy. You can reach the controller at privacy@cartly.app.
+**Data controller.** Tyler Piwowarski, operating Cartly, is the data controller for the personal data described in this Policy. You can reach the controller at privacy@usecartly.com.
 
 **Legal bases we rely on.**
 - **Performance of a contract** (GDPR Art. 6(1)(b)) — to provide the Service you asked for.
 - **Consent** (Art. 6(1)(a)) — for the optional dietary alert personalization you configure.
 - **Legitimate interests** (Art. 6(1)(f)) — to keep the Service secure and prevent abuse.
 
-**Your rights.** You have the right to access, rectify, erase, restrict, or object to our processing, the right to data portability, and the right to withdraw consent. Email privacy@cartly.app to exercise any of these.
+**Your rights.** You have the right to access, rectify, erase, restrict, or object to our processing, the right to data portability, and the right to withdraw consent. Email privacy@usecartly.com to exercise any of these.
 
 **Right to lodge a complaint.** You also have the right to complain to your local data protection supervisory authority.
 
@@ -134,11 +134,11 @@ If you are a California resident, the California Consumer Privacy Act, as amende
 
 **Your rights under the CCPA/CPRA.** You have the right to know what we collect, to delete your personal information, to correct inaccurate information, to opt out of sale or sharing (not applicable — we do neither), to limit the use of sensitive personal information (we do not collect sensitive personal information), and not to be discriminated against for exercising these rights.
 
-**How to exercise your rights.** Email privacy@cartly.app, or use **Settings → Delete Account** in the app. We will respond within 45 days. We verify requests by matching the email address on your account.
+**How to exercise your rights.** Email privacy@usecartly.com, or use **Settings → Delete Account** in the app. We will respond within 45 days. We verify requests by matching the email address on your account.
 
 ## 10. Children's privacy
 
-Cartly is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has created an account, email privacy@cartly.app and we will delete the account and any associated data.
+Cartly is not directed at children under 13, and we do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has created an account, email privacy@usecartly.com and we will delete the account and any associated data.
 
 Cartly is rated **4+** on the App Store because it contains no objectionable content, but the service itself is intended for general audiences 13 and older.
 
@@ -169,7 +169,7 @@ A diff history of every change is publicly visible in the Git history of the rep
 
 For questions or requests about this Policy or your data, email:
 
-**privacy@cartly.app**
+**privacy@usecartly.com**
 
 Tyler Piwowarski, operating Cartly
 California, United States

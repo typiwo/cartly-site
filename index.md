@@ -16,4 +16,4 @@ Coming to the App Store soon.
 
 - [Privacy Policy](/privacy/)
 - [Terms of Service](/terms/)
-- Contact: **privacy@cartly.app**
+- Contact: **privacy@usecartly.com**

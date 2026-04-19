@@ -120,7 +120,7 @@ You agree to defend, indemnify, and hold harmless Cartly and its operator from a
 
 ### 13.1 Informal resolution first
 
-Before filing any formal proceeding, you agree to contact us at **privacy@cartly.app** with a written description of the dispute and the relief you are seeking. You and Cartly will attempt in good faith to resolve the dispute informally for at least 30 days before initiating arbitration.
+Before filing any formal proceeding, you agree to contact us at **privacy@usecartly.com** with a written description of the dispute and the relief you are seeking. You and Cartly will attempt in good faith to resolve the dispute informally for at least 30 days before initiating arbitration.
 
 ### 13.2 Binding arbitration
 
@@ -136,7 +136,7 @@ Either party may bring an individual claim in a small-claims court of competent 
 
 ### 13.5 30-day opt-out
 
-You may opt out of this arbitration agreement and class-action waiver by emailing **privacy@cartly.app** within **30 days** of the date you first accepted these Terms, with the subject line "Arbitration Opt-Out" and your name, the email address associated with your Cartly account, and a clear statement that you wish to opt out. Opting out does not affect any other part of these Terms.
+You may opt out of this arbitration agreement and class-action waiver by emailing **privacy@usecartly.com** within **30 days** of the date you first accepted these Terms, with the subject line "Arbitration Opt-Out" and your name, the email address associated with your Cartly account, and a clear statement that you wish to opt out. Opting out does not affect any other part of these Terms.
 
 ### 13.6 Fees
 
@@ -160,7 +160,7 @@ We may update these Terms from time to time. If we make a material change, we wi
 
 **Assignment.** You may not assign these Terms without our prior written consent. We may assign these Terms (for example, in connection with a sale of the business).
 
-**Notices to you** may be sent by email to the address on your account or by posting in the app. **Notices to us** must be sent to privacy@cartly.app.
+**Notices to you** may be sent by email to the address on your account or by posting in the app. **Notices to us** must be sent to privacy@usecartly.com.
 
 **Apple-specific terms.** If you downloaded Cartly from the Apple App Store, you acknowledge that these Terms are between you and Cartly only, not with Apple, and that Apple is not responsible for the Service or its content. Apple and Apple's subsidiaries are third-party beneficiaries of these Terms with the right to enforce them against you. In the event of any failure of the Service to conform to any applicable warranty, you may notify Apple, and Apple will refund the subscription purchase price, if any, to you; to the maximum extent permitted by applicable law, Apple has no other warranty obligation whatsoever with respect to the Service.
 
@@ -168,7 +168,7 @@ We may update these Terms from time to time. If we make a material change, we wi
 
 For questions about these Terms, email:
 
-**privacy@cartly.app**
+**privacy@usecartly.com**
 
 Tyler Piwowarski, operating Cartly
 California, United States
