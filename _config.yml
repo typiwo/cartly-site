@@ -1,0 +1,15 @@
+title: Cartly
+description: AI-powered grocery health scoring for iOS.
+url: https://cartly.app
+markdown: kramdown
+permalink: /:title/
+
+exclude:
+  - README.md
+  - LAUNCH-OPS.md
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
