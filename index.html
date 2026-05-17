@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clem — Eat well. Feel good.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bone:#FAF8EC; --bone-warm:#F2EED8; --bone-deep:#E8E3C8;
+      --ink:#0F1410; --grass:#2E5C36;
+      --orange:#E8612A; --orange-deep:#C94518;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',-apple-system,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6;overflow-x:hidden;}
+
+    /* ── SCREENS (onboarding only) ── */
+    .screen{display:none;min-height:100vh;}
+    .screen.active{display:block;animation:pgIn .3s ease-out;}
+    @keyframes pgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    #landing{display:block;}
+
+    /* ── SHARED ── */
+    .wrap{max-width:1080px;margin:0 auto;padding:0 36px;}
+    .orange-rule{display:block;width:36px;height:3px;background:var(--orange);margin-bottom:20px;}
+
+    .btn-primary{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      background:var(--orange);color:var(--bone);
+      border:2px solid var(--orange);
+      padding:15px 32px;border-radius:4px;
+      font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      cursor:pointer;transition:all .18s;box-shadow:4px 5px 0 var(--ink);
+      text-decoration:none;white-space:nowrap;
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:5px 7px 0 var(--ink);}
+    .btn-primary:active{transform:translateY(0);box-shadow:2px 3px 0 var(--ink);}
+
+    .btn-ghost{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      background:transparent;color:var(--ink);
+      border:2px solid var(--ink);
+      padding:15px 32px;border-radius:4px;
+      font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      cursor:pointer;transition:all .18s;box-shadow:4px 5px 0 var(--ink);
+      text-decoration:none;white-space:nowrap;
+    }
+    .btn-ghost:hover{background:var(--ink);color:var(--bone);transform:translateY(-2px);}
+
+    .btn-ghost-inv{
+      display:inline-flex;align-items:center;justify-content:center;
+      background:transparent;color:var(--bone);
+      border:2px solid rgba(250,248,236,.25);
+      padding:15px 32px;border-radius:4px;
+      font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      cursor:pointer;transition:all .18s;text-decoration:none;white-space:nowrap;
+    }
+    .btn-ghost-inv:hover{border-color:var(--bone);}
+
+    .btn-ob{
+      display:inline-flex;align-items:center;justify-content:center;flex:1;
+      padding:14px 28px;border-radius:4px;border:2px solid var(--ink);cursor:pointer;
+      font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+      transition:all .18s;box-shadow:3px 4px 0 rgba(15,20,16,.2);
+      text-decoration:none;
+    }
+    .btn-ob.pri{background:var(--orange);color:var(--bone);border-color:var(--orange);}
+    .btn-ob.pri:hover:not(:disabled){background:var(--orange-deep);border-color:var(--orange-deep);transform:translateY(-1px);}
+    .btn-ob.sec{background:var(--bone-warm);color:var(--ink);}
+    .btn-ob.sec:hover{background:var(--bone-deep);}
+    .btn-ob:disabled{opacity:.35;cursor:not-allowed;}
+
+    /* ════════════════════════
+       LANDING PAGE
+    ════════════════════════ */
+
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:100;
+      background:var(--ink);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:18px 36px;
+      border-bottom:1px solid rgba(250,248,236,.08);
+    }
+    .nav-logo{font-family:'Fraunces',serif;font-size:20px;font-weight:900;letter-spacing:-.5px;color:var(--bone);}
+    .nav-links{display:flex;align-items:center;gap:32px;}
+    .nav-links a{font-size:10px;color:rgba(250,248,236,.45);text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:2px;transition:color .2s;}
+    .nav-links a:hover{color:var(--bone);}
+    .nav-ctas{display:flex;align-items:center;gap:12px;}
+
+    /* HERO */
+    .hero-section{
+      background:var(--bone);
+      padding:88px 0 96px;
+      border-bottom:2px solid var(--ink);
+    }
+    .hero-inner{
+      display:grid;grid-template-columns:1fr 300px;
+      gap:64px;align-items:center;
+    }
+    .hero-eyebrow{
+      font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+      color:var(--orange);display:flex;align-items:center;gap:10px;margin-bottom:24px;
+    }
+    .hero-eyebrow::before{content:'';display:block;width:24px;height:2px;background:var(--orange);}
+    .hero-meta-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(15,20,16,.35);}
+    .hero h1{
+      font-family:'Fraunces',serif;font-size:52px;font-weight:700;
+      line-height:1.05;letter-spacing:-1.8px;color:var(--ink);margin-bottom:20px;
+    }
+    .hero h1 em{font-style:italic;color:var(--orange);}
+    .hero-sub{font-size:16px;color:rgba(15,20,16,.6);line-height:1.75;margin-bottom:36px;max-width:460px;}
+
+    /* TWO PRIMARY CTAS SIDE BY SIDE */
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+    .hero-cta-group{display:flex;flex-direction:column;gap:6px;}
+    .hero-cta-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(15,20,16,.4);}
+
+    /* PERSONA ROTATE */
+    .persona-word{
+      color:var(--orange);font-style:italic;
+      transition:opacity .35s ease;
+      display:inline;
+    }
+    .persona-word.fading{opacity:0;}
+
+    /* VIDEO PLACEHOLDER */
+    .video-col{justify-self:center;width:100%;max-width:300px;}
+    .video-frame{
+      width:100%;aspect-ratio:9/16;
+      background:var(--bone-warm);
+      border:2px solid var(--ink);
+      border-radius:4px;
+      box-shadow:6px 8px 0 rgba(15,20,16,.18);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:16px;position:relative;overflow:hidden;cursor:pointer;
+      transition:border-color .2s;
+    }
+    .video-frame:hover{border-color:var(--orange);}
+    .video-play{
+      width:56px;height:56px;border-radius:50%;
+      border:2px solid rgba(15,20,16,.2);
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(15,20,16,.4);font-size:18px;
+      transition:all .2s;
+    }
+    .video-frame:hover .video-play{border-color:var(--orange);color:var(--orange);}
+    .video-label{
+      font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+      color:rgba(15,20,16,.3);text-align:center;padding:0 20px;
+    }
+    .video-tag{
+      position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+      background:var(--ink);border:1px solid rgba(15,20,16,.15);
+      border-radius:4px;padding:6px 14px;white-space:nowrap;
+      font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;
+      color:rgba(250,248,236,.7);
+    }
+
+    /* PHONE (kept for mobile fallback, hidden in hero) */
+    .phone{display:none;}
+
+    /* PAIN */
+    .pain-section{background:var(--bone);padding:96px 0 72px;}
+    .editorial-eyebrow{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .editorial-eyebrow::before{content:'';display:block;width:20px;height:2px;background:var(--orange);}
+    .section-h2{font-family:'Fraunces',serif;font-size:42px;font-weight:700;letter-spacing:-1.4px;line-height:1.1;color:var(--ink);margin-bottom:16px;}
+    .section-rule{display:block;height:2px;background:var(--ink);margin:20px 0 0;}
+
+    .stat-strip{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      border:2px solid var(--ink);border-radius:4px;
+      box-shadow:4px 5px 0 rgba(15,20,16,.18);
+      overflow:hidden;margin:56px 0;
+    }
+    .stat-cell{padding:36px 28px;background:var(--bone-warm);border-right:2px solid var(--ink);}
+    .stat-cell:last-child{border-right:none;}
+    .stat-num{font-family:'Fraunces',serif;font-size:52px;font-weight:900;color:var(--orange);line-height:1;margin-bottom:10px;}
+    .stat-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--ink);opacity:.45;margin-bottom:6px;}
+    .stat-desc{font-size:13px;color:var(--ink);opacity:.65;line-height:1.5;}
+
+    .pull-quote{border-left:4px solid var(--orange);padding:24px 32px;background:var(--bone-warm);border-top:2px solid var(--ink);border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);border-radius:0 4px 4px 0;box-shadow:4px 5px 0 rgba(15,20,16,.15);margin-bottom:56px;}
+    .pull-quote p{font-family:'Fraunces',serif;font-style:italic;font-size:22px;font-weight:700;color:var(--ink);line-height:1.5;}
+    .pull-quote p em{color:var(--orange);font-style:normal;}
+
+    .review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+    .review-card{background:var(--bone-warm);border:2px solid var(--ink);padding:26px;}
+    .review-card:nth-child(1){border-radius:4px 0 0 0;}.review-card:nth-child(2){border-radius:0 4px 0 0;}
+    .review-card:nth-child(3){border-radius:0 0 0 4px;}.review-card:nth-child(4){border-radius:0 0 4px 0;}
+    .r-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:10px;display:block;}
+    .r-quote{font-size:14px;font-style:italic;line-height:1.7;color:var(--ink);}
+
+    /* SOLUTION */
+    .solution-section{background:var(--ink);padding:88px 0;}
+    .solution-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .solution-h2{font-family:'Fraunces',serif;font-size:40px;font-weight:700;letter-spacing:-1.4px;line-height:1.1;color:var(--bone);margin-bottom:20px;}
+    .solution-h2 em{font-style:italic;color:var(--orange);}
+    .solution-p{font-size:15px;color:rgba(250,248,236,.6);line-height:1.8;margin-bottom:28px;}
+    .chip-row{display:flex;flex-wrap:wrap;gap:10px;}
+    .chip{padding:8px 16px;border:2px solid rgba(250,248,236,.15);border-radius:4px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(250,248,236,.5);}
+
+    .how-list{background:var(--bone-warm);border:2px solid rgba(250,248,236,.1);border-radius:4px;overflow:hidden;box-shadow:6px 8px 0 rgba(15,20,16,.4);}
+    .how-item{display:flex;align-items:flex-start;gap:0;border-bottom:2px solid var(--ink);}
+    .how-item:last-child{border-bottom:none;}
+    .how-num{
+      width:52px;flex-shrink:0;padding:20px 0;
+      display:flex;align-items:center;justify-content:center;
+      border-right:2px solid var(--ink);
+      font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--orange);
+    }
+    .how-body{padding:20px 20px;}
+    .how-title{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:3px;}
+    .how-desc{font-size:12px;color:var(--ink);opacity:.55;line-height:1.45;}
+
+    /* INTERVIEW */
+    .interview-section{background:var(--bone-warm);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:72px 0;}
+    .interview-inner{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:center;}
+    .interview-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--orange);display:block;margin-bottom:12px;}
+    .interview-h2{font-family:'Fraunces',serif;font-size:32px;font-weight:700;letter-spacing:-1px;line-height:1.15;color:var(--ink);margin-bottom:10px;}
+    .interview-p{font-size:14px;color:var(--ink);opacity:.55;line-height:1.6;max-width:480px;}
+    .interview-aside{text-align:center;flex-shrink:0;}
+    .interview-detail{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--ink);opacity:.35;margin-top:10px;display:block;}
+
+    /* FINAL */
+    .final-section{background:var(--ink);padding:112px 0;text-align:center;}
+    .rule-center{width:36px;height:3px;background:var(--orange);margin:0 auto 24px;}
+    .final-h2{font-family:'Fraunces',serif;font-size:50px;font-weight:700;letter-spacing:-1.8px;line-height:1.05;color:var(--bone);margin-bottom:16px;}
+    .final-h2 em{font-style:italic;color:var(--orange);}
+    .final-p{font-size:15px;color:rgba(250,248,236,.45);margin-bottom:40px;line-height:1.7;max-width:440px;margin-left:auto;margin-right:auto;}
+    .final-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+    .final-note{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(250,248,236,.2);margin-top:24px;}
+
+    /* ════════════════════════
+       ONBOARDING SCREENS
+    ════════════════════════ */
+    #ob-shell{display:none;}
+    #ob-shell.active{display:block;}
+
+    .ob-nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:20px 36px;border-bottom:2px solid var(--ink);background:var(--bone);
+      position:sticky;top:0;z-index:100;
+    }
+    .ob-back{background:none;border:none;cursor:pointer;font-size:10px;color:var(--ink);font-weight:800;letter-spacing:2px;text-transform:uppercase;transition:transform .2s;}
+    .ob-back:hover{transform:translateX(-3px);}
+    .ob-logo{font-family:'Fraunces',serif;font-size:20px;font-weight:900;color:var(--ink);}
+    .ob-step-lbl{font-size:10px;color:var(--ink);opacity:.3;text-transform:uppercase;letter-spacing:2px;font-weight:800;}
+
+    .ob-wrap{min-height:calc(100vh - 65px);display:flex;align-items:flex-start;justify-content:center;padding:52px 36px 96px;}
+    .ob-inner{width:100%;max-width:540px;}
+
+    .ob-eyebrow{font-size:10px;color:var(--orange);text-transform:uppercase;letter-spacing:2px;font-weight:800;display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+    .ob-eyebrow::before{content:'';display:block;width:18px;height:2px;background:var(--orange);}
+    .ob-title{font-family:'Fraunces',serif;font-size:32px;font-weight:700;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;color:var(--ink);}
+    .ob-sub{font-size:14px;color:var(--ink);line-height:1.6;opacity:.5;margin-bottom:36px;}
+
+    .opts{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;}
+    .opt{
+      display:flex;align-items:center;
+      background:var(--bone-warm);border:2px solid var(--ink);border-radius:4px;
+      cursor:pointer;transition:all .18s;user-select:none;
+      box-shadow:3px 4px 0 rgba(15,20,16,.15);overflow:hidden;
+      animation:optIn .22s ease-out backwards;
+    }
+    .opt:nth-child(1){animation-delay:.05s}.opt:nth-child(2){animation-delay:.09s}
+    .opt:nth-child(3){animation-delay:.13s}.opt:nth-child(4){animation-delay:.17s}
+    .opt:nth-child(5){animation-delay:.21s}.opt:nth-child(6){animation-delay:.25s}
+    @keyframes optIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    .opt:hover{background:var(--bone);transform:translateY(-1px);box-shadow:4px 5px 0 rgba(15,20,16,.2);}
+    .opt.sel{background:var(--bone);border-color:var(--orange);box-shadow:3px 4px 0 rgba(232,97,42,.2);}
+    .opt-num{
+      width:52px;flex-shrink:0;align-self:stretch;
+      display:flex;align-items:center;justify-content:center;
+      background:var(--bone-deep);border-right:2px solid var(--ink);
+      font-family:'Fraunces',serif;font-size:16px;font-weight:900;color:var(--ink);opacity:.3;
+      transition:all .18s;
+    }
+    .opt.sel .opt-num{background:var(--orange);color:var(--bone);opacity:1;border-color:var(--orange);}
+    .opt-body{flex:1;padding:16px 18px;}
+    .opt-lbl{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px;line-height:1.3;}
+    .opt-desc{font-size:12px;color:var(--ink);opacity:.45;line-height:1.4;}
+    .opt-chk{width:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+    .opt-chk-box{width:18px;height:18px;border:2px solid var(--ink);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:var(--bone);transition:all .18s;}
+    .opt.sel .opt-chk-box{background:var(--orange);border-color:var(--orange);}
+    .opt.sel .opt-chk-box::after{content:'✓';}
+
+    .sel-cnt{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--ink);opacity:.3;min-height:16px;margin-bottom:28px;}
+    .ob-btns{display:flex;gap:10px;}
+    .ob-tip{font-size:11px;color:var(--ink);margin-top:14px;text-align:center;opacity:.3;letter-spacing:.5px;}
+
+    /* CONFIRMATION SCREEN */
+    .conf-wrap{min-height:calc(100vh - 65px);display:flex;align-items:center;justify-content:center;padding:52px 36px;}
+    .conf-inner{max-width:480px;width:100%;text-align:center;}
+
+    /* PLAN SCREEN */
+    #screen-plan{background:var(--ink);}
+    .plan-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 36px;}
+    .plan-inner{max-width:500px;width:100%;}
+    .plan-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:52px;}
+    .plan-back-btn{background:none;border:none;color:var(--bone);opacity:.3;font-size:20px;cursor:pointer;transition:opacity .2s;}
+    .plan-back-btn:hover{opacity:.8;}
+    .plan-dots{display:flex;gap:6px;}
+    .plan-dot{width:22px;height:3px;background:rgba(232,97,42,.3);border-radius:2px;animation:dotPls 1.4s ease-in-out infinite;}
+    .plan-dot:nth-child(2){animation-delay:.18s}.plan-dot:nth-child(3){animation-delay:.36s}
+    @keyframes dotPls{0%,100%{background:rgba(232,97,42,.3)}50%{background:rgba(232,97,42,.9)}}
+    .plan-eyebrow{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .plan-eyebrow::before{content:'';display:block;width:18px;height:2px;background:var(--orange);}
+    .plan-title{font-family:'Fraunces',serif;font-size:40px;font-weight:700;line-height:1.1;margin-bottom:48px;letter-spacing:-1.4px;color:var(--bone);}
+    .checklist{margin-bottom:44px;border-top:1px solid rgba(250,248,236,.07);}
+    .chk-item{display:flex;align-items:center;gap:14px;padding:14px 0;font-size:16px;font-weight:500;color:var(--bone);opacity:0;animation:chkIn .5s ease-out forwards;border-bottom:1px solid rgba(250,248,236,.07);}
+    .chk-item:nth-child(1){animation-delay:.4s}.chk-item:nth-child(2){animation-delay:.85s}
+    .chk-item:nth-child(3){animation-delay:1.3s}.chk-item:nth-child(4){animation-delay:1.75s}
+    .chk-item:nth-child(5){animation-delay:2.2s}
+    @keyframes chkIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+    .chk-dot{width:22px;height:22px;border-radius:50%;background:var(--grass);border:2px solid rgba(250,248,236,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:900;color:var(--bone);animation:chkPop .3s ease-out forwards;animation-delay:inherit;transform:scale(0);}
+    @keyframes chkPop{from{transform:scale(0)}to{transform:scale(1)}}
+    .plan-cta-wrap{opacity:0;animation:riseIn .5s ease-out forwards;animation-delay:2.8s;}
+    @keyframes riseIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .plan-sub{font-size:11px;color:rgba(250,248,236,.3);margin-top:12px;text-align:center;opacity:0;animation:fadeIn .4s ease-out forwards;animation-delay:3.1s;}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      .hero-inner{grid-template-columns:1fr;padding:0;}
+      .hero h1{font-size:38px;}
+      .video-col{max-width:240px;margin:0 auto;}
+      .stat-strip{grid-template-columns:1fr;}
+      .stat-cell{border-right:none;border-bottom:2px solid var(--ink);}
+      .stat-cell:last-child{border-bottom:none;}
+      .review-grid{grid-template-columns:1fr;}
+      .solution-inner{grid-template-columns:1fr;}
+      .interview-inner{grid-template-columns:1fr;gap:32px;}
+      .final-h2{font-size:36px;}
+      .nav-links{display:none;}
+      .nav-ctas .btn-ghost-inv{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LANDING PAGE (single scroll)
+══════════════════════════════════════ -->
+<div id="landing">
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">Clem</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#book">Book a call</a>
+    </div>
+    <div class="nav-ctas">
+      <a href="https://calendar.app.google/k8iTqz5bfWSDmaBL8" target="_blank" rel="noopener" class="btn-ghost-inv">Book a call</a>
+      <a href="https://testflight.apple.com/join/JSux95cu" target="_blank" rel="noopener" class="btn-primary">Download beta</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+            <div class="hero-eyebrow" style="margin-bottom:0;">Private beta — 100 spots</div>
+            <span style="width:1px;height:14px;background:rgba(15,20,16,.12);display:block;"></span>
+            <span class="hero-meta-tag">Personalized food scanner · iOS</span>
+          </div>
+          <h1>The food industry made labels unreadable. Clem makes them make sense — for <span class="persona-word" id="persona-text">the label-reader.</span></h1>
+          <p class="hero-sub">Most food apps return a verdict with no context. You get a red score, feel like you failed, and Google it for 20 minutes anyway. Clem gives you a clear answer built around your body — in under 2 seconds. The more you scan, the better it knows you.</p>
+
+          <!-- BOTH CTAS FRONT AND CENTER -->
+          <div class="hero-ctas">
+            <div class="hero-cta-group">
+              <span class="hero-cta-label">Try the app</span>
+              <a href="https://testflight.apple.com/join/JSux95cu" target="_blank" rel="noopener" class="btn-primary">Download on TestFlight</a>
+            </div>
+            <div class="hero-cta-group">
+              <span class="hero-cta-label">Shape what we build</span>
+              <a href="https://calendar.app.google/k8iTqz5bfWSDmaBL8" target="_blank" rel="noopener" class="btn-ghost">Book a 15-min call</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-col">
+          <div class="video-frame" onclick="this.style.borderColor='var(--orange)'">
+            <div class="video-play">&#9654;</div>
+            <div class="video-label">Drop your app<br>walkthrough video here</div>
+            <div class="video-tag">Clem · Food Scanner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN -->
+  <section class="pain-section" id="how">
+    <div class="wrap">
+      <div class="editorial-eyebrow">The problem</div>
+      <h2 class="section-h2">Food apps weren't built for you.<br>They were built for everyone.</h2>
+      <p style="font-size:15px;color:var(--ink);opacity:.55;line-height:1.75;max-width:560px;margin-top:16px;">That's the problem. "Everyone" doesn't have your sensitivities, your goals, or your body. You get the same red score as someone with completely different needs — and no explanation why.</p>
+      <span class="section-rule"></span>
+
+      <div class="stat-strip">
+        <div class="stat-cell">
+          <div class="stat-num">73%</div>
+          <div class="stat-label">Feel more anxious after scanning</div>
+          <div class="stat-desc">More confused, not more confident.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">12<span style="font-size:26px">min</span></div>
+          <div class="stat-label">Lost second-guessing one product</div>
+          <div class="stat-desc">Googling, cross-checking, still unsure.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Apps that score for your body</div>
+          <div class="stat-desc">Same score for everyone. Useful for no one specific.</div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        <p>"A red score doesn't mean it's bad <em>for you.</em> But no app has ever stopped to ask."</p>
+      </div>
+
+      <div style="margin:56px 0 48px;padding:28px 32px;background:var(--bone-warm);border:2px solid var(--ink);border-radius:4px;box-shadow:4px 5px 0 rgba(15,20,16,.15);">
+        <p style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:10px;">"People who use Clem stop second-guessing. They start trusting themselves."</p>
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--orange);">What we hear from beta users</span>
+      </div>
+
+      <div class="editorial-eyebrow">Sound familiar?</div>
+      <h2 class="section-h2" style="margin-bottom:32px;">You're not the problem.<br>The app is.</h2>
+      <div class="review-grid">
+        <div class="review-card">
+          <span class="r-label">App Store review</span>
+          <p class="r-quote">"I scan something and immediately feel guilty — even if I was totally fine with it before opening the app."</p>
+        </div>
+        <div class="review-card">
+          <span class="r-label">App Store review</span>
+          <p class="r-quote">"It has no idea I'm lactose intolerant. I get the same score as someone with no restrictions. What's the point?"</p>
+        </div>
+        <div class="review-card">
+          <span class="r-label">App Store review</span>
+          <p class="r-quote">"Red doesn't mean I can't eat it. But the app won't say why, so I spend 20 minutes Googling anyway."</p>
+        </div>
+        <div class="review-card">
+          <span class="r-label">App Store review</span>
+          <p class="r-quote">"I wanted to feel better about food. This app just made me more scared of it."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution-section">
+    <div class="wrap">
+      <div class="solution-inner">
+        <div>
+          <div class="editorial-eyebrow" style="color:var(--orange);">How Clem is different</div>
+          <h2 class="solution-h2">A score that actually <em>knows you.</em></h2>
+          <p class="solution-p">Not a generic number. A clear yes or no — built around your body, your goals, your sensitivities. Scan something. Get an answer. Feel good. Every time.</p>
+          <div class="chip-row">
+            <span class="chip">Made for your body</span>
+            <span class="chip">No guilt spirals</span>
+            <span class="chip">Answers in seconds</span>
+            <span class="chip">Grows with you</span>
+          </div>
+        </div>
+        <div class="how-list">
+          <div class="how-item">
+            <div class="how-num">01</div>
+            <div class="how-body">
+              <div class="how-title">You tell Clem what matters.</div>
+              <div class="how-desc">Sensitivities, goals, how you like to eat — takes two minutes.</div>
+            </div>
+          </div>
+          <div class="how-item">
+            <div class="how-num">02</div>
+            <div class="how-body">
+              <div class="how-title">You scan something.</div>
+              <div class="how-desc">Clem reads the label and scores it against your profile — not a universal standard.</div>
+            </div>
+          </div>
+          <div class="how-item">
+            <div class="how-num">03</div>
+            <div class="how-body">
+              <div class="how-title">You get a clear answer — or a better option.</div>
+              <div class="how-desc">Yes, no, or a swap that works better for you. Short reason included. No Googling.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERVIEW -->
+  <section class="interview-section" id="book">
+    <div class="wrap">
+      <div class="interview-inner">
+        <div>
+          <span class="interview-tag">We'd love to hear from you</span>
+          <h2 class="interview-h2">Help us build Clem right.<br>15 minutes. No prep.</h2>
+          <p class="interview-p">We're talking to people who care about eating well but hate feeling judged by their food app. Your call shapes what we build next.</p>
+        </div>
+        <div class="interview-aside">
+          <a href="https://calendar.app.google/k8iTqz5bfWSDmaBL8" target="_blank" rel="noopener" class="btn-ghost">Book a call</a>
+          <span class="interview-detail">15 min · No prep needed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL -->
+  <section class="final-section">
+    <div class="wrap">
+      <div class="rule-center"></div>
+      <h2 class="final-h2">Stop feeling judged.<br>Start feeling <em>good.</em></h2>
+      <p class="final-p">100 spots for the first people in. Free to join. No credit card.</p>
+      <div class="final-ctas">
+        <a href="https://testflight.apple.com/join/JSux95cu" target="_blank" rel="noopener" class="btn-primary">Download on TestFlight</a>
+        <a href="https://calendar.app.google/k8iTqz5bfWSDmaBL8" target="_blank" rel="noopener" class="btn-ghost-inv">Talk to us first</a>
+      </div>
+      <p class="final-note">Private beta · 100 spots only</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:var(--ink);border-top:1px solid rgba(250,248,236,.08);padding:28px 36px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <span style="font-size:11px;color:rgba(250,248,236,.3);">&copy; 2026 Clem</span>
+    <div style="display:flex;gap:20px;">
+      <a href="/privacy/" style="font-size:11px;color:rgba(250,248,236,.4);text-decoration:none;">Privacy Policy</a>
+      <a href="/terms/" style="font-size:11px;color:rgba(250,248,236,.4);text-decoration:none;">Terms of Service</a>
+      <a href="mailto:privacy@clemapp.com" style="font-size:11px;color:rgba(250,248,236,.4);text-decoration:none;">Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /landing -->
+
+<!-- ══════════════════════════════════════
+     ONBOARDING SHELL (triggered by CTA)
+══════════════════════════════════════ -->
+<div id="ob-shell">
+
+  <!-- STEP 1 -->
+  <div class="screen active" id="screen-1">
+    <div class="ob-nav">
+      <button class="ob-back" onclick="exitOnboarding()">← Back to site</button>
+      <div class="ob-logo">Clem</div>
+      <div class="ob-step-lbl">Step 1 of 4</div>
+    </div>
+    <div class="ob-wrap">
+      <div class="ob-inner">
+        <div class="ob-eyebrow">Let's make this yours</div>
+        <h1 class="ob-title">What's been getting in the way?</h1>
+        <p class="ob-sub">Pick up to 2. Clem tackles these first.</p>
+        <div class="opts" id="grid1">
+          <div class="opt" data-id="ingredient-confusion">
+            <div class="opt-num">01</div>
+            <div class="opt-body"><div class="opt-lbl">Feeling anxious when I scan something</div><div class="opt-desc">Scores stress me out more than they help me.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="dietary-restriction">
+            <div class="opt-num">02</div>
+            <div class="opt-body"><div class="opt-lbl">Apps that ignore what I can't eat</div><div class="opt-desc">I have sensitivities. I check everything myself, every time.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="guilt">
+            <div class="opt-num">03</div>
+            <div class="opt-body"><div class="opt-lbl">Second-guessing myself all the time</div><div class="opt-desc">I make a choice and immediately wonder if it was wrong.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="decision-paralysis">
+            <div class="opt-num">04</div>
+            <div class="opt-body"><div class="opt-lbl">Spending too long deciding</div><div class="opt-desc">I just want a clear, fast answer — not a 20-minute rabbit hole.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="food-waste">
+            <div class="opt-num">05</div>
+            <div class="opt-body"><div class="opt-lbl">Buying things I forget to use</div><div class="opt-desc">Good intentions, then it goes bad. I waste money and feel bad.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="trust-labels">
+            <div class="opt-num">06</div>
+            <div class="opt-body"><div class="opt-lbl">Not knowing what "healthy" means for me</div><div class="opt-desc">"Clean." "Natural." I can't tell what's real anymore.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+        </div>
+        <div class="sel-cnt" id="cnt1"></div>
+        <div class="ob-btns">
+          <button class="btn-ob sec" onclick="exitOnboarding()">Back</button>
+          <button class="btn-ob pri" id="btn1" onclick="goScreen('screen-2')" disabled>Continue</button>
+        </div>
+        <p class="ob-tip">You can change this anytime in settings</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="screen" id="screen-2">
+    <div class="ob-nav">
+      <button class="ob-back" onclick="goScreen('screen-1')">← Back</button>
+      <div class="ob-logo">Clem</div>
+      <div class="ob-step-lbl">Step 2 of 4</div>
+    </div>
+    <div class="ob-wrap">
+      <div class="ob-inner">
+        <div class="ob-eyebrow">Your style</div>
+        <h1 class="ob-title">How should Clem talk to you?</h1>
+        <p class="ob-sub">Pick one. This shapes how your answers are delivered.</p>
+        <div class="opts" id="grid2">
+          <div class="opt" data-id="intuitive">
+            <div class="opt-num">A</div>
+            <div class="opt-body"><div class="opt-lbl">Just tell me yes or no</div><div class="opt-desc">I don't need a breakdown. I want to feel confident and move on.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="structured">
+            <div class="opt-num">B</div>
+            <div class="opt-body"><div class="opt-lbl">Show me why</div><div class="opt-desc">I want to know what's in it and what it means for me.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="learning">
+            <div class="opt-num">C</div>
+            <div class="opt-body"><div class="opt-lbl">Walk me through it</div><div class="opt-desc">Plain language only. Help me build confidence over time.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+        </div>
+        <div class="sel-cnt" id="cnt2"></div>
+        <div class="ob-btns">
+          <button class="btn-ob sec" onclick="goScreen('screen-1')">Back</button>
+          <button class="btn-ob pri" id="btn2" onclick="goScreen('screen-3')" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="screen" id="screen-3">
+    <div class="ob-nav">
+      <button class="ob-back" onclick="goScreen('screen-2')">← Back</button>
+      <div class="ob-logo">Clem</div>
+      <div class="ob-step-lbl">Step 3 of 4</div>
+    </div>
+    <div class="ob-wrap">
+      <div class="ob-inner">
+        <div class="ob-eyebrow">Your goal</div>
+        <h1 class="ob-title">What would feel like a win?</h1>
+        <p class="ob-sub">Pick up to 2. Clem builds your score around these.</p>
+        <div class="opts" id="grid3">
+          <div class="opt" data-id="freedom">
+            <div class="opt-num">A</div>
+            <div class="opt-body"><div class="opt-lbl">Eating without the anxiety</div><div class="opt-desc">Scan something and feel okay about it. No more spiraling.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="digestion">
+            <div class="opt-num">B</div>
+            <div class="opt-body"><div class="opt-lbl">Feeling better in my body</div><div class="opt-desc">Food choices that match what I actually need.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="energy">
+            <div class="opt-num">C</div>
+            <div class="opt-body"><div class="opt-lbl">More energy, less crash</div><div class="opt-desc">Know what's slowing me down and what's actually helping me.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+          <div class="opt" data-id="sustainability">
+            <div class="opt-num">D</div>
+            <div class="opt-body"><div class="opt-lbl">Keep it simple — no obsessing</div><div class="opt-desc">No tracking. No rules. Just easy, good choices.</div></div>
+            <div class="opt-chk"><div class="opt-chk-box"></div></div>
+          </div>
+        </div>
+        <div class="sel-cnt" id="cnt3"></div>
+        <div class="ob-btns">
+          <button class="btn-ob sec" onclick="goScreen('screen-2')">Back</button>
+          <button class="btn-ob pri" id="btn3" onclick="goScreen('screen-4')" disabled>Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: CONFIRM -->
+  <div class="screen" id="screen-4">
+    <div class="ob-nav">
+      <button class="ob-back" onclick="goScreen('screen-3')">← Back</button>
+      <div class="ob-logo">Clem</div>
+      <div class="ob-step-lbl">Step 4 of 4</div>
+    </div>
+    <div class="conf-wrap">
+      <div class="conf-inner">
+        <span class="orange-rule" style="margin:0 auto 24px;"></span>
+        <h1 style="font-family:'Fraunces',serif;font-size:36px;font-weight:700;letter-spacing:-1px;line-height:1.15;color:var(--ink);margin-bottom:16px;">You just did the hard part.</h1>
+        <p style="font-size:15px;color:var(--ink);opacity:.55;line-height:1.7;max-width:400px;margin:0 auto 40px;">You told us what you actually need. Clem builds your score around your body, your goals, your call.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn-ob sec" onclick="goScreen('screen-3')" style="flex:none;">Back</button>
+          <button class="btn-ob pri" onclick="goScreen('screen-plan')" style="flex:none;">Build my score</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLAN -->
+  <div class="screen" id="screen-plan">
+    <div class="plan-wrap">
+      <div class="plan-inner">
+        <div class="plan-hd">
+          <button class="plan-back-btn" onclick="goScreen('screen-4')">←</button>
+          <div class="plan-dots"><div class="plan-dot"></div><div class="plan-dot"></div><div class="plan-dot"></div></div>
+        </div>
+        <div class="plan-eyebrow">Building now</div>
+        <h1 class="plan-title">Your personal score is being built.</h1>
+        <div class="checklist">
+          <div class="chk-item"><div class="chk-dot">✓</div><span id="chk1">Learning what your body needs</span></div>
+          <div class="chk-item"><div class="chk-dot">✓</div><span id="chk2">Removing what stresses you out</span></div>
+          <div class="chk-item"><div class="chk-dot">✓</div><span id="chk3">Setting your confidence baseline</span></div>
+          <div class="chk-item"><div class="chk-dot">✓</div><span id="chk4">Tuning your score to what matters</span></div>
+          <div class="chk-item"><div class="chk-dot">✓</div><span id="chk5">Your personal score is ready</span></div>
+        </div>
+        <div class="plan-cta-wrap">
+          <a href="https://testflight.apple.com/join/JSux95cu" target="_blank" rel="noopener" class="btn-primary" style="width:100%;display:flex;">Download on TestFlight</a>
+          <p class="plan-sub">Your first scan already knows your body. No extra setup needed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /ob-shell -->
+
+<script>
+  /* ── PERSONA ROTATION ── */
+  const personas = [
+    'the label-reader.',
+    'the person with food sensitivities.',
+    'the clean eater who wants truth.',
+    'the health-conscious shopper.',
+    'anyone tired of Googling every ingredient.'
+  ];
+  let pIdx = 0;
+  const pEl = document.getElementById('persona-text');
+  setInterval(() => {
+    if(!pEl) return;
+    pEl.classList.add('fading');
+    setTimeout(() => {
+      pIdx = (pIdx + 1) % personas.length;
+      pEl.textContent = personas[pIdx];
+      pEl.classList.remove('fading');
+    }, 380);
+  }, 2800);
+
+  const S = { s1:new Set(), s2:new Set(), s3:new Set() };
+
+  /* Landing ↔ Onboarding */
+  function enterOnboarding(){
+    document.getElementById('landing').style.display='none';
+    document.getElementById('ob-shell').classList.add('active');
+    window.scrollTo(0,0);
+  }
+  function exitOnboarding(){
+    document.getElementById('ob-shell').classList.remove('active');
+    document.getElementById('landing').style.display='block';
+    window.scrollTo(0,0);
+  }
+
+  /* Screen navigation (onboarding only) */
+  function goScreen(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0,0);
+    if(id==='screen-plan') buildChecklist();
+  }
+
+  /* Option grids */
+  function initGrid(gId,set,max,btnId,cntId){
+    const g=document.getElementById(gId);
+    if(!g)return;
+    g.querySelectorAll('.opt').forEach(o=>{
+      o.addEventListener('click',function(){
+        const id=this.getAttribute('data-id');
+        const btn=document.getElementById(btnId);
+        const cnt=document.getElementById(cntId);
+        if(set.has(id)){
+          set.delete(id);this.classList.remove('sel');
+        } else {
+          if(set.size<max){set.add(id);this.classList.add('sel');}
+          else{cnt.textContent=`Max ${max} selected`;setTimeout(()=>{cnt.textContent=set.size>0?`${set.size} of ${max} selected`:''},1800);return;}
+        }
+        btn.disabled=set.size===0;
+        cnt.textContent=set.size>0?`${set.size} of ${max} selected`:'';
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{
+    initGrid('grid1',S.s1,2,'btn1','cnt1');
+    initGrid('grid2',S.s2,1,'btn2','cnt2');
+    initGrid('grid3',S.s3,2,'btn3','cnt3');
+  });
+
+  /* Checklist copy */
+  const painMap={'ingredient-confusion':'Replacing scan anxiety with confidence','dietary-restriction':'Flagging your sensitivities automatically','guilt':'Stopping the second-guessing loop','decision-paralysis':'Getting you fast, clear answers','food-waste':'Removing your grocery guesswork','trust-labels':'Cutting through the marketing noise'};
+  const philoMap={'intuitive':'Setting up your clear yes/no mode','structured':'Enabling your full ingredient view','learning':'Preparing plain-English explanations'};
+  const goalMap={'freedom':'Removing the anxiety around eating','digestion':'Prioritizing how food makes you feel','energy':'Surfacing what affects your energy first','sustainability':'Making healthy eating easy, not effortful'};
+
+  function buildChecklist(){
+    const items=[];
+    if(S.s1.size>0) items.push(painMap[Array.from(S.s1)[0]]||'Learning what your body needs');
+    if(S.s2.size>0) items.push(philoMap[Array.from(S.s2)[0]]||'Setting up your answer style');
+    if(S.s3.size>0) items.push(goalMap[Array.from(S.s3)[0]]||'Prioritizing your goals');
+    items.push('Tuning your score to what matters');
+    items.push('Your personal score is ready');
+    for(let i=0;i<5;i++){const el=document.getElementById(`chk${i+1}`);if(el&&items[i])el.textContent=items[i];}
+  }
+</script>
+</body>
+</html>
